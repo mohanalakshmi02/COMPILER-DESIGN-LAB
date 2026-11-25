@@ -1,0 +1,24 @@
+%{
+#include<stdio.h>
+%}
+%x A
+%%
+"//".*          ;
+"/*"            { BEGIN(A); }
+<A>"*/"   { BEGIN(INITIAL); }
+<A>\n     ;
+<A>.      ;
+.               { printf("%s", yytext); }
+\n              { printf("\n"); }
+%%
+int yywrap(void)
+{
+    return 1;
+}
+int main()
+{
+    printf("Enter C program:\n");
+    yylex();
+    return 0;
+}
+

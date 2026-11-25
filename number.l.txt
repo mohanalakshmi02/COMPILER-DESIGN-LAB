@@ -1,0 +1,12 @@
+%{
+%}
+%% 
+[0-9]+ {printf("\n number valid\n");}
+.+ {printf("\n number invalid\n");}
+%%
+int yywrap(void){}
+int main()
+{ 
+ printf("enter a number:");
+ yylex();
+}b 

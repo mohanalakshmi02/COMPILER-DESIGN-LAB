@@ -1,0 +1,24 @@
+%{
+#include <stdio.h>
+%}
+%x A
+%%
+"//".*      ;
+"/*"        BEGIN(A); 
+<A>"*/"     BEGIN(INITIAL); 
+<A>\n       ; 
+<A>.        ;
+[ ]+        { printf(" "); }
+\n          { printf("\n"); }
+.           { ECHO; }
+%%
+int main()
+{
+printf("Enter C program:\n");
+yylex();
+return 0;
+}
+int yywrap()
+{
+return 1;
+}

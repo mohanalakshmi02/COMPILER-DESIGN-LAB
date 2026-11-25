@@ -1,0 +1,21 @@
+%{
+int count=0;
+%}
+
+%%
+[aeiouAEIOU]    {count++;}
+\n              {printf("Total number of vowels = %d\n",count);}
+.               ;
+%%
+
+int yywrap(void)
+{
+    return 1;
+}
+
+int main()
+{
+    printf("Enter a sentence:\n");
+    yylex();
+    return 0;
+}

@@ -1,0 +1,40 @@
+%{
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+char old[20], new[20];
+%}
+
+%%
+[a-zA-Z]+ {
+    char temp[20];
+    int i;
+    strcpy(temp, yytext);
+
+    for(i = 0; temp[i]; i++)
+        temp[i] = tolower(temp[i]);
+
+    for(i = 0; old[i]; i++)
+        old[i] = tolower(old[i]);
+
+    if(strcmp(temp, old) == 0)
+        printf("%s", new);
+    else
+        printf("%s", yytext);
+}
+.|\n { ECHO; }
+%%
+int main()
+{
+    printf("Enter old word: ");
+    scanf("%19s", old);
+    printf("Enter new word: ");
+    scanf("%19s", new);
+    printf("Enter passage:\n");
+    yylex();
+    return 0;
+}
+int yywrap()
+{
+    return 1;
+}

@@ -1,0 +1,19 @@
+%{w
+int upper=0, lower=0;
+%}
+%%
+[A-Z]    {upper++;}
+[a-z]    {lower++;}
+\n       {printf("Uppercase letters = %d\nLowercase letters = %d\n",upper,lower);}
+.        ;
+%%
+int yywrap(void)
+{
+ return 1;
+}
+int main()
+{
+ printf("Enter a word:\n");
+ yylex();
+ return 0;
+}
